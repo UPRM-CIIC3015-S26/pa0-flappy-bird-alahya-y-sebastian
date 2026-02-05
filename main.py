@@ -88,7 +88,7 @@ while running:
 
     if game_started == True and game_over == False:
         bird_velocity = bird_velocity + gravity
-        bird_y = bird_y + bird_velocity
+        bird_y += bird_velocity
         pipe_x = pipe_x - pipe_speed
 
         if pipe_x < -70:
@@ -97,7 +97,7 @@ while running:
             # TODO 4: Fixing the scoring
             # When you pass through the pipes the score should be updated to the current score + 1. Implement the
             # logic to accomplish this scoring system.
-            score = 1
+            score += 1
 
         if bird_y > 600 or bird_y < 0:
             game_over = True
