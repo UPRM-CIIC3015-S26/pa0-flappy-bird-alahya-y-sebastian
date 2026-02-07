@@ -1,5 +1,5 @@
 import pygame, random
-pygame.init()
+
 '''
 Welcome to PA0 – Flappy Bird! Throughout this code, you are going to find a recreation of a game you have probably
 heard of before. This is an introductory assignment designed to help you familiarize yourself with what you can expect 
@@ -7,9 +7,16 @@ in future PAs. In this PA, you will barely need to code—mostly just tweaking s
 fewer than five lines of new code. It is recommended that you read through the code and the comments explaining 
 some of the game mechanics.
 '''
+#sounds
+pygame.mixer.init()
+pygame.init()
+pygame.mixer.music.load("Route 201.mp3")
+pygame.mixer.music.play(-1)
+hop = pygame.mixer.Sound('jump.wav')
+hop.set_volume(0.9)
 # Setup the screen -->
 screen = pygame.display.set_mode((400, 600))
-pygame.display.set_caption("Flappy Bird")
+pygame.display.set_caption("Pokemon:")
 
 # Colors -->
 # NOTE: This is in the RGB (Red, Green, Blue) format
@@ -69,6 +76,7 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
+                hop.play()
                 if game_started == False:
                     game_started = True
                     bird_velocity = jump
