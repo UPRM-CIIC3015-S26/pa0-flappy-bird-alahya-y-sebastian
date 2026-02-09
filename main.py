@@ -7,6 +7,7 @@ in future PAs. In this PA, you will barely need to code—mostly just tweaking s
 fewer than five lines of new code. It is recommended that you read through the code and the comments explaining 
 some of the game mechanics.
 '''
+
 #sounds
 pygame.mixer.init()
 pygame.init()
@@ -16,7 +17,12 @@ hop = pygame.mixer.Sound('jump.wav')
 hop.set_volume(0.9)
 # Setup the screen -->
 screen = pygame.display.set_mode((400, 600))
-pygame.display.set_caption("Pokemon:")
+pygame.display.set_caption("Pocket Monsters")
+background = pygame.image.load("forest.png.jpg").convert()
+background = pygame.transform.scale(background, (400, 600))
+bird_img = pygame.image.load("charizard (1).png").convert_alpha()
+pipe_top_img = pygame.image.load("pole grass.jpg").convert_alpha()
+pipe_bottom_img = pygame.image.load("pole grass.jpg").convert_alpha()
 
 # Colors -->
 # NOTE: This is in the RGB (Red, Green, Blue) format
@@ -118,18 +124,20 @@ while running:
         if bird_rect.colliderect(top_pipe_rect) or bird_rect.colliderect(bottom_pipe_rect):
             game_over = True
 
-    screen.fill(pygame.Color('grey12'))
+    screen.blit(background, (0, 0))
     # TODO 5: A Bird's Color
     # The color of the player is currently white, let's change that a bit! You are free to change the bird's
     # to whatever you wish. You will need to head back to where the PLAYER variable was created and change the values.
-    pygame.draw.rect(screen, PLAYER, (bird_x, bird_y, 30, 30)) # Drawing the bird (You don't need to touch this line!)
-    pygame.draw.rect(screen, GREEN, (pipe_x, 0, pipe_width, pipe_height))
-    pygame.draw.rect(screen, GREEN, (pipe_x, pipe_height + pipe_gap, pipe_width, 600))
+    screen.blit(bird_img, (bird_x, bird_y)) # Drawing the bird (You don't need to touch this line!)
+    top_pipe_scaled = pygame.transform.scale(pipe_top_img, (pipe_width, pipe_height))
+    screen.blit(top_pipe_scaled, (pipe_x, 0))
+    bottom_pipe_scaled = pygame.transform.scale(pipe_bottom_img, (pipe_width, 600 - (pipe_height + pipe_gap)))
+    screen.blit(bottom_pipe_scaled, (pipe_x, pipe_height + pipe_gap))
     score_text = small_font.render(str(score), True, WHITE)
     screen.blit(score_text, (score_x, score_y))
 
     if game_started == False: # Start UI -->
-        title_text = big_font.render("Flappy Bird", True, WHITE)
+        title_text = small_font.render("Charmander run", True, WHITE)
         instruction_text = small_font.render("Press space bar to flap!", True, WHITE)
         screen.blit(title_text, (title_x, title_y))
         screen.blit(instruction_text, (instruction_x, instruction_y))
