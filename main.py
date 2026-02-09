@@ -48,7 +48,7 @@ score_y = 10
 # Player Variables -->
 bird_x = 50
 bird_y = 300
-bird_velocity = -10
+bird_velocity = 8
 # TODO 1: Complete
 # Looks like the player is falling too quickly not giving a change to flap it's wing, maybe tweak around with the value of this variable
 gravity = 0.5
@@ -137,7 +137,7 @@ while running:
     screen.blit(score_text, (score_x, score_y))
 
     if game_started == False: # Start UI -->
-        title_text = small_font.render("Charmander run", True, WHITE)
+        title_text = big_font.render("Char run", True, WHITE)
         instruction_text = small_font.render("Press space bar to flap!", True, WHITE)
         screen.blit(title_text, (title_x, title_y))
         screen.blit(instruction_text, (instruction_x, instruction_y))
